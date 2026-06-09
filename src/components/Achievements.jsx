@@ -1,48 +1,55 @@
-import { useEffect, useState, useRef } from 'react'
-import { IndianRupee, Calculator, Rocket } from 'lucide-react'
+import { useEffect, useState, useRef } from "react";
+import { IndianRupee, Calculator, Rocket } from "lucide-react";
 
-const CounterCard = ({ icon: Icon, value, suffix = '', prefix = '', label, color }) => {
-  const [count, setCount] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-  const ref = useRef(null)
+const CounterCard = ({
+  icon: Icon,
+  value,
+  suffix = "",
+  prefix = "",
+  label,
+  color,
+}) => {
+  const [count, setCount] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
-    )
+      { threshold: 0.3 },
+    );
 
     if (ref.current) {
-      observer.observe(ref.current)
+      observer.observe(ref.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (!isVisible) return
+    if (!isVisible) return;
 
-    const duration = 2000
-    const steps = 60
-    const increment = value / steps
-    let current = 0
+    const duration = 2000;
+    const steps = 60;
+    const increment = value / steps;
+    let current = 0;
 
     const timer = setInterval(() => {
-      current += increment
+      current += increment;
       if (current >= value) {
-        setCount(value)
-        clearInterval(timer)
+        setCount(value);
+        clearInterval(timer);
       } else {
-        setCount(Math.floor(current))
+        setCount(Math.floor(current));
       }
-    }, duration / steps)
+    }, duration / steps);
 
-    return () => clearInterval(timer)
-  }, [isVisible, value])
+    return () => clearInterval(timer);
+  }, [isVisible, value]);
 
   return (
     <div
@@ -51,13 +58,15 @@ const CounterCard = ({ icon: Icon, value, suffix = '', prefix = '', label, color
     >
       {/* Hover glow */}
       <div className="absolute inset-0 bg-primary/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
+
       <div className="relative">
         {/* Icon */}
-        <div className={`w-14 h-14 rounded-xl ${color} flex items-center justify-center mb-6`}>
+        <div
+          className={`w-14 h-14 rounded-xl ${color} flex items-center justify-center mb-6`}
+        >
           <Icon className="text-white" size={28} />
         </div>
-        
+
         {/* Counter */}
         <div className="flex items-baseline gap-1 mb-3">
           <span className="text-sm text-primary font-semibold">{prefix}</span>
@@ -66,41 +75,41 @@ const CounterCard = ({ icon: Icon, value, suffix = '', prefix = '', label, color
           </span>
           <span className="text-3xl font-bold text-primary">{suffix}</span>
         </div>
-        
+
         {/* Label */}
         <p className="text-gray-400 text-sm uppercase tracking-wider font-medium">
           {label}
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Achievements = () => {
   const achievements = [
     {
       icon: IndianRupee,
-      value: 311,
-      prefix: '₹',
-      suffix: 'Cr',
-      label: 'Funding Facilitated',
-      color: 'bg-primary',
+      value: 250,
+      prefix: "₹",
+      suffix: "Cr",
+      label: "Funding Facilitated",
+      color: "bg-primary",
+    },
+    {
+      icon: FileCheck,
+      value: 1055,
+      suffix: "+",
+      label: "Approvals Facilitated",
+      color: "bg-amber-500",
     },
     {
       icon: Calculator,
-      value: 180,
-      suffix: '+',
-      label: 'Tax Solutions Delivered',
-      color: 'bg-emerald-500',
+      value: 175,
+      suffix: "+",
+      label: "Tax Solutions Delivered",
+      color: "bg-emerald-500",
     },
-    {
-      icon: Rocket,
-      value: 280,
-      suffix: '+',
-      label: 'Startups Helped',
-      color: 'bg-amber-500',
-    },
-  ]
+  ];
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8">
@@ -114,7 +123,8 @@ const Achievements = () => {
             Key Achievements
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Proven results that speak for themselves. Here's a snapshot of the impact I've made for startups and businesses.
+            Proven results that speak for themselves. Here's a snapshot of the
+            impact I've made for startups and businesses.
           </p>
         </div>
 
@@ -126,7 +136,7 @@ const Achievements = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Achievements
+export default Achievements;
