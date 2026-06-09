@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { IndianRupee, Calculator, Rocket } from "lucide-react";
+import { IndianRupee, Calculator, Rocket, FileCheck } from "lucide-react";
 
 const CounterCard = ({
   icon: Icon,
